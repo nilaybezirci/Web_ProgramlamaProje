@@ -42,12 +42,7 @@
                             <li class="nav-item">
                                 <a class="btn btn-danger m-1" asp-controller="Account" asp-action="Logout">Log out</a>
                             </li>
-                        @*    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                            {
-                                <li class="nav-item">
-                                    <a class="btn btn-primary m-1" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a>
-                                </li>
-                            }*@
+                       
                         }
                         else if (User.Identity?.IsAuthenticated ?? false)
                         {

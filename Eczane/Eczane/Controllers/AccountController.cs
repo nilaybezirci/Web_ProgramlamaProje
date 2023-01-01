@@ -50,7 +50,7 @@ namespace Eczane.Controllers
 
         public IActionResult Login(string? returnUrl = null) => View(new LoginViewModel { ReturnUrl = returnUrl });
 
-        //public IActionResult Login() => View();
+     
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginVM)
@@ -98,8 +98,7 @@ namespace Eczane.Controllers
             user.LastName = appUser.LastName;
             user.Address = appUser.Address;
 
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var user = await _userManager.FindByIdAsync(userId);
+          
 
             await _userManager.UpdateAsync(user);
             TempData["Success"] = "User information updated!";

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-
+// Admin ilaç kontrol
 namespace Eczane.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -29,10 +29,7 @@ namespace Eczane.Areas.Admin.Controllers
             ViewBag.TotalPages = (int)Math.Ceiling((decimal)_context.Drugs.Count() / pageSize);
 
             return View(await _context.Drugs.Include(d => d.Category).ToListAsync());
-            //.Include(d => d.Category)
-            //.Skip((p - 1) * pageSize)
-            //.Take(pageSize)
-            //.ToListAsync());
+           
         }
 
         public IActionResult Create()
@@ -44,7 +41,8 @@ namespace Eczane.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Drug drug)
+
+        public async Task<IActionResult> Create(Drug drug) //ilaç ekleme işlemleri iilk olarak ilaç var mı diye kontrol edilir yoksa eklenilir
         {
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", drug.CategoryId);
 
@@ -86,7 +84,7 @@ namespace Eczane.Areas.Admin.Controllers
             return View(drug);
         }
 
-        public async Task<IActionResult> Edit(long id)
+        public async Task<IActionResult> Edit(long id) //ilaç düzenleme işlemleri 
         {
             Drug drug = await _context.Drugs.FindAsync(id);
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", drug.CategoryId);
@@ -139,7 +137,7 @@ namespace Eczane.Areas.Admin.Controllers
             return View(drug);
         }
 
-        public async Task<IActionResult> Delete(long id)
+        public async Task<IActionResult> Delete(long id) //ilaç silme işlemleri 
         {
             Drug drug = await _context.Drugs.FindAsync(id);
 

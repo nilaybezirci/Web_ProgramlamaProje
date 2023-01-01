@@ -129,11 +129,7 @@ namespace Eczane.Controllers
         }
 
 
-        //public string getUserId()
-        //{
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)
-        //    return userId;
-        //}
+      
 
 
         public async Task<IActionResult> Checkoutt()

@@ -8,8 +8,8 @@ using System.Data;
 namespace Eczane.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
-    public class OrdersController : Controller
+    [Authorize(Roles = "Admin")] //sadece adminin erişebilmesi için Authorize işlemi 
+    public class OrdersController : Controller //sipariş yönetiminin gerçekleştirilmesi
     {
      
         private readonly ApplicationDbContext _context;
@@ -21,7 +21,7 @@ namespace Eczane.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> complete(string id)
+        public async Task<IActionResult> complete(string id) 
         {
             Order order = await _context.Orders.FindAsync(id);
             if (order != null && order.isCompleted == false)
@@ -50,10 +50,7 @@ namespace Eczane.Areas.Admin.Controllers
             return View(await _context.Orders.ToListAsync());
 
 
-            //return View(await _context.Orders.OrderByDescending(d => d.Id)
-            //    .Skip((p - 1) * pageSize)
-            //    .Take(pageSize)
-            //    .ToListAsync());
+         
         }
         public async Task<IActionResult> SortCompleted(int p = 1)
         {
