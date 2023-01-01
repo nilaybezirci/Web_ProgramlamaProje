@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Drug>
+
+@{
+    ViewData["Title"] = "Drugs";
+}
+
+@if (Model.FirstOrDefault().Category == null)
+{
+    <h1>All</h1>
+}
+else
+{
+    <h1>@Model.FirstOrDefault().Category.Name</h1>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <img src="/images/medicine/@item.Image" class="img-fluid" width="300" alt="" />
+            <h4>@item.Name</h4>
+            <div>
+                @Html.Raw(item.Description)
+            </div>
+            <p>
+                @item.Price.ToString("C2")
+            </p>
+            <p>
+                <a class="btn btn-primary" asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id">Add to cart</a>
+            </p>
+        </div>
+    }
+
+
+    @if (ViewBag.TotalPages > 1)
+    {
+        <div class="d-flex w-100 justify-content-center">
+            <pagination page-count="@ViewBag.TotalPages"
+                    page-target="/drugs/@ViewBag.CategorySlug"
+                    page-number="@ViewBag.PageNumber"
+                    page-range="@ViewBag.PageRange">
+            </pagination>
+        </div>
+    }
+
